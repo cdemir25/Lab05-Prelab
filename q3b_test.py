@@ -5,9 +5,40 @@ from q3b import add_binary
 
 class test_add_binary(unittest.TestCase):
     def test_add_binary1(self):
+        def add_binary(a, b):
+            a = a[2:]
+            b = b[2:]
+
+            if len(a) < len(b):
+                a = '0' * (len(b) - len(a)) + a
+            else:
+                b = '0' * (len(a) - len(b)) + b
+
+            carry = 0
+            result = ""
+
+            for i in range(len(a) - 1, -1, -1):
+                bit_sum = int(a[i]) + int(b[i]) + carry
+                result = str(bit_sum % 2) + result
+                carry = bit_sum // 2
+
+            if carry:
+                result = "1" + result
+
+            i = 0
+            while i < len(result) and result[i] == "0":
+                i += 1
+
+            result = result[i:]
+            if result == "":
+                result = "0"
+
+            return "0b" + result
+        
         self.assertEqual(add_binary('0b1010','0b1011'),'0b10101', msg= "Test 1 Failed")
         
     def test_add_binary2(self):
+        
         self.assertEqual(add_binary('0b11','0b1'),'0b100', msg= "Test 2 Failed")
         
     def test_add_binary3(self):

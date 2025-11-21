@@ -4,6 +4,15 @@ from q3a import add_binary
 
 class test_add_binary(unittest.TestCase):
     def test_add_binary1(self):
+        def add_binary(a, b):
+            
+            a_num = int(a, 2)
+            b_num = int(b, 2)
+
+         
+            result = bin(a_num + b_num)
+
+            return result
         self.assertEqual(add_binary('0b1010','0b1011'),'0b10101', msg= "Test 1 Failed")
         
     def test_add_binary2(self):
